@@ -13,7 +13,7 @@ This repository documents the setup and security of a self-managed virtual serve
 - [Quickstart](#quickstart)
 - [Usage – basic knowledge](#usage---basic-knowledge)
 - [Additional Information](#additional-information)
-- [Project Checklist](../../static/files/Git%20+%20VServer%20Checkliste.pdf)
+- [Project Checklist](../../../static/files/Git%20+%20VServer%20Checkliste.pdf)
 
 ---
 
