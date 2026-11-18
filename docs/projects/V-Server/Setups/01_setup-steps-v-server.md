@@ -301,7 +301,7 @@ git config --global user.email "userr@gmail.com"
 ```
 
 
-![checkglobaluseriinfo](../../../../static/img/check%20Global%20User.png)
+![checkglobaluseriinfo](../../../../static/img//check_Global_User_V1.png)
 
 ## 10. Server mit GitHub verbinden
 
@@ -313,7 +313,7 @@ ssh-keygen -t ed25519
 ~/.ssh/gitconnect
 cat ~/.ssh/gitconnect.pub
 ```
-![gitConnect](../../../../static/img/Gitconnect.png)
+![gitConnect](../../../../static/img/Gitconnect_V1.png)
 
 
 
