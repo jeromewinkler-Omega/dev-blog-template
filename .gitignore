@@ -4,6 +4,9 @@
 # Production
 /build
 
+#pycharm
+.idea/
+
 # Generated files
 .docusaurus
 .cache-loader
@@ -18,6 +21,7 @@
 *.tsbuildinfo
 
 # VS Code (geteilte Einstellungen behalten, Rest ignorieren)
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
