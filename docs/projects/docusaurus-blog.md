@@ -19,7 +19,7 @@ A personal documentation and blog site built with Docusaurus. This guide walks t
 to start your own Docusaurus you have to minimal install and set up the following:
 
 - Windows 10/11 with PowerShell and the built-in OpenSSH client
-- [VS-Code](https://code.visualstudio.com/)
+- Visual Studio Code (VS Code) or PyCharm installed [VS-Code](https://code.visualstudio.com/) or [Pycharm](https://www.jetbrains.com/de-de/pycharm/)
 - your own [GitHub](https://github.com/) account 
 - [node.js](Version see in your Docusaurus/package.json)
 - a [Docusaurus](https://docusaurus.io/) template
