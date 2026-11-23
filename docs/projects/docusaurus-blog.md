@@ -113,7 +113,7 @@ cd project
  ### 5.Create a feature branch:
 
 ```
-git switch -c feature/setup-blog
+git switch -c setup-blog
 ```
 ```
 git switch main
@@ -169,7 +169,7 @@ npm run serve      # Test the build; press Ctrl + C to exit
 ```
 git add .
 git commit -m "Setup blog"
-git push -u origin feature/setup-blog
+git push -u origin setup-blog
 gh pr create --base main
 ```
 
