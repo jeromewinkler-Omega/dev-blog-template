@@ -1,32 +1,55 @@
+---
+sidebar_position: 1
+---
+
 # Docusaurus-Blog
 
-<!--INSERT YOUR BRIEF DESCRIPTION HERE -->
+
 A personal documentation and blog site built with Docusaurus. This guide walks through the complete setup — from creating an SSH key to running the site locally — and the feature-branch workflow used to submit changes via pull request.
 
-## TOC
+## Table of content
 
-<!--INSERT YOUR TABLE OF CONTENTS HERE -->
+- [Prerequesites](#prerequesites)
 - [Quickstart](#quickstart)
 - [Description](#description)
 - [Further References](#further-references)
 
-import GithubLinkAdmonition from '@site/src/components/GithubLinkAdmonition';
+## Prerequesites
 
-<GithubLinkAdmonition 
-    link="https://github.com/jeromewinkler-Omega/dev-blog-template"
-    title="Github Tip" 
-    type="tip"
->
-Checkout this repository to see the code/implementation
-</GithubLinkAdmonition>
+to start your own Docusaurus you have to minimal install and set up the following:
+
+- Windows 10/11 with PowerShell and the built-in OpenSSH client
+- Visual Studio Code (VS Code) or PyCharm installed [VS-Code](https://code.visualstudio.com/) or [Pycharm](https://www.jetbrains.com/de-de/pycharm/)
+- your own [GitHub](https://github.com/) account 
+- [node.js](Version see in your Docusaurus/package.json)
+- a [Docusaurus](https://docusaurus.io/) template
+
+
+## Features 
+
+- **Documentation & blog** where you can store all your static Guides and knowledge base (Container,Git,one writeups and more)
+- **Security:** Integrity scan through your package.json. Secrets live only in the local `../../.env` file, which is excluded via `.gitignore`.
+- **Markdown and MDX Support:** You write content in standard Markdown while embedding interactive JSX and React components directly inside your pages via Docusaurus Markdown Features.
+- **Pluggable Architecture:** The core system delegates all features, routes, and capabilities to individual plugins. You can start with a basic template and add official or community plugins as your needs grow.
 
 ## Quickstart
 
+1. **Configurate Git** with your own identity credentials [step 1](#1--configure-git-one-time-setup)
+2. **Create a SSH-Key** and add it to your GitHub-Settings [step2](#2-create-an-ssh-key-and-add-it-to-github-one-time-setup-per-pc)
+3. **Test the SSH connection** [step 3](#3-to-test-the-ssh-connection)
+4. **Create a repository** and clone the template [step 4](#4-create-your-own-repository-from-the-template-and-clone-it)
+5. **Create a branch** to make your changes -> `git switch -c <branchname>` -> [setp 5](#5create-a-feature-branch)
+6. **Install dependencies:** `npm install` or `npm ci` [step 6](#6-install-dependencies)
+7. **Create your local `../../.env` file** -> [step 7](#7-create-a-env-file-if-a-envexample-file-exists-in-the-repo)
+8. **start the dev-server localy:** -> `npm run start` [step 8](#8-develop-build-and-test)
+9. **Commit**, push and open a pull request to merge new features. `git add <modifed files>` `git commit -m "<changes>"` `git push` -> [step 9](#9-submit-changes)
+10. [Further References](#further-references)
+
 ### 1.  Configure Git (one-time setup)
 
-Powershell:
 
-```bash
+
+```
 git config --global user.name "Your Name"
 git config --global user.email "your@email.com"
 ```
@@ -35,9 +58,9 @@ git config --global user.email "your@email.com"
 
 Create the key. Confirm the file location by pressing Enter. Setting a passphrase is recommended but not necessary.
 
-Powershell:
 
-```bash
+
+```
 ssh-keygen -t ed25519 -C "your@email.com"
 ```
 
@@ -47,150 +70,106 @@ Setting a passphrase is recommended but not neccessary.
 
 Next, start the SSH agent so you don’t have to enter your passphrase every time. 
 
-Powershell:
 
-```bash
+```powershell
 Get-Service ssh-agent | Set-Service -StartupType Automatic
 Start-Service ssh-agent
 ssh-add $HOME\.ssh\id_ed25519
 ```
-
+On Windows, the agent stores the key permanently, so `ssh-add` only needs to be run once.
 Then, copy the public key to your clipboard:
 
 Powershell:
-
-```bash
-Get-Content $HOME\.ssh\id_ed25519.pub | Set-Clipboard
+```powershell
+Get-Content $HOME\.ssh\id_ed25519.pub 
 ```
 
 On GitHub, add it under Settings → SSH and GPG keys → New SSH key.
 
-### 3. To test:
 
-Terminal
+```
+git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
+```
+### 3. To test the SSH connection:
 
-```bash
+```
 ssh -T git@github.com
 ```
 
-
-From VScode Temrinal 
-
-to 
-
-```bash
-git config --global core.sshCommand "C:/Windows/System32/OpenSSH/ssh.exe"
-```
-
+:::note
 If you see "Hi yourname! You’ve successfully authenticated," it is working correctly.
-
+:::
 
 ### 4. Create your own repository from the template and clone it
 
 Open the template repository in your browser, click **Use this template → Create a new repository**, then clone it:
 
-Powershell:
-
-```bash
+```
 cd C:\Directory
-git clone https://github.com/YOUR-USER/project.git
+git clone https://github.com/jeromewinkler-Omega/dev-blog-template.git
 cd project
 ```
 
- ### 5.Later, to update your local main:
+ ### 5.Create a feature branch:
 
-```bash
+```
+git switch -c setup-blog
+```
+```
 git switch main
 git pull origin main 
 ```
 
 
-Alternatively, you can do this in your browser by clicking "Use this template" on the template repository page. Afterward, 
+### 6. Install dependencies
 
-clone it using: 
-```bash
-git clone git@github.com:yourname/my-blog.git. 
 ```
-
-### 6. Create a feature branch
-
-Powershell:
-
-```bash
-git switch -c feature/setup-blog
-```
-
-### 7. Install dependencies
-
-Powershell:
-
-```bash
 npm install
-
+#or
+npm ci
 ```
 
 :::note
-`npm ci` installs the exact versions from `package-lock.json`. Use `npm install <package>` only when adding a new package.
+`npm ci` installs the exact versions from `../../package-lock.json`. Use `npm install <package>` only when adding a new package.
 :::
 
-```bash
+```
 # if necessayry update your react-/ react-dom verion 
 npm install react@19 react-dom@19 
 npm run build
 ```
-* Noch nicht committet
 
-Powershell:
-```bash
-git restore package.json package-lock.json
-npm install
+
+### 7. Create a .env file (if a .env.example file exists in the repo):
+
+Only needed if the repository contains a `.env.example` file:
 ```
-Damit sind beide Dateien wieder auf dem alten Stand, und npm ci installiert wieder React 18.
-
-* Schon committet
-
-Powershell:
-
-```bash
-git log --oneline          # Hash des Update-Commits suchen, z. B. a1b2c3d
-git revert a1b2c3d
-npm install
-git push
-
-git revert erzeugt einen neuen Commit, der die Änderung wieder aufhebt. Das ist sicher, auch wenn du schon gepusht hast.
-```
-
-
-### 8. Create a .env file (if a .env.example file exists in the repo):
-
-Terminal
-
-```bash
 Copy-Item .env.example .env
-Then, enter your values ​​into the .env file.
 ```
+Then, enter your values into the .env file.
+needs to be excluded via `gitignore` and is not allowed to commit!
 
-### 9. Develop, build, and test
+## Usage 
 
-Powershell:
+### 8. Develop, build, and test
 
-```bash
+
+
+```
 npm run start      # Development with live-reload, localhost:3000
-
 npm run build      # Build the final site 
 into the 'build' directory
-
 npm run serve      # Test the build; press Ctrl + C to exit
 ```
 
-### 10. Submit changes
+### 9. Submit changes
 
-Terminal
 
-```bash
+
+```
 git add .
 git commit -m "Setup blog"
-git push -u origin feature/setup-blog
+git push -u origin setup-blog
 gh pr create --base main
 ```
 
@@ -203,7 +182,7 @@ This project is a static documentation and blog site built with [Docusaurus 3](h
  
 Key aspects of the setup:
 
-- **Security:** `package-lock.json` stores an integrity hash (SHA-512) for each package, so tampered downloads are detected. Secrets live only in the local `.env` file, which is excluded via `.gitignore`.
+- **Security:** `../../package-lock.json` stores an integrity hash (SHA-512) for each package, so tampered downloads are detected. Secrets live only in the local `.env` file, which is excluded via `.gitignore`.
 - **Feature-branch workflow:** All changes are made in feature branches and merged into `main` through a pull request, which serves as the review and approval step.
 - **CI/CD:** A GitHub Actions workflow builds the site on every pull request and deploys it to GitHub Pages after merging into `main`.
 - **Dependency updates:** Dependabot opens pull requests for outdated packages. Each update is only merged if the CI build passes.
@@ -219,4 +198,4 @@ Key aspects of the setup:
 - [Dependabot Documentation](https://docs.github.com/en/code-security/dependabot)
 - [GitHub CLI Manual](https://cli.github.com/manual/)
 - [npm ci](https://docs.npmjs.com/cli/commands/npm-ci)
-- [Git Documentation](https://git-scm.com/doc)
+- [Git Documentation](https://git-scm.com/doc)---
